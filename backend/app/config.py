@@ -25,7 +25,11 @@ class Settings(BaseSettings):
     demo_password: str = "admin123"
 
     database_path: Path = BACKEND_DIR / "incidents.db"
-    cors_origins: list[str] = ["http://localhost:5173", "http://127.0.0.1:5173"]
+    cors_origins: list[str] = [
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        "https://frontend-rouge-two-76.vercel.app",
+    ]
 
 
 @lru_cache
