@@ -148,6 +148,9 @@ export class ApiError extends Error {
   }
 }
 
+// Backend location. Override with VITE_API_URL (e.g. http://127.0.0.1:8000 for local FastAPI).
+const API_BASE = (import.meta.env.VITE_API_URL ?? 'https://agent-with-memory-1.onrender.com').replace(/\/+$/, '')
+
 let onUnauthorized: () => void = () => {}
 export const setUnauthorizedHandler = (fn: () => void) => {
   onUnauthorized = fn
@@ -160,9 +163,9 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
 
   let res: Response
   try {
-    res = await fetch(path, { ...init, headers })
+    res = await fetch(`${API_BASE}${path}`, { ...init, headers })
   } catch {
-    throw new ApiError(0, 'Cannot reach the backend. Is FastAPI running on port 8000?')
+    throw new ApiError(0, `Cannot reach the backend at ${API_BASE}.`)
   }
   if (res.status === 401 && !path.startsWith('/api/auth/login') && !path.startsWith('/api/auth/register')) {
     session.clear()
