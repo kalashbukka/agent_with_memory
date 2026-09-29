@@ -185,3 +185,11 @@ Use a fresh Hindsight bank (or change `HINDSIGHT_BANK_ID`) so the first incident
 * **Groq timeout, rate limit, auth error or invalid output:** the user gets a clear error. Output is validated with Pydantic and retried once if it is invalid.
 
 The agent only analyzes incidents and recommends actions. It never runs commands against production.
+
+### Future Improvements
+1.Real-time incident monitoring
+2.More advanced anomaly detection
+3.Slack/Teams alert integration
+4.Improved incident analytics and dashboards
+5.Automated incident severity classification
+6.Support for more AI models
